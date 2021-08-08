@@ -1,0 +1,6 @@
+{
+	"workbench.activityBar.visible": false,
+	"files.associations": {
+		"type_traits": "cpp"
+	}
+}
