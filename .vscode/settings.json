@@ -1,6 +1,13 @@
 {
 	"workbench.activityBar.visible": false,
 	"files.associations": {
-		"type_traits": "cpp"
-	}
+		"type_traits": "cpp",
+		"defs.h": "c",
+		"app.h": "c",
+		"vulkan.h": "c"
+	},
+	"C_Cpp.default.includePath":
+	[
+		"C:\\VulkanSDK\\1.2.182.0\\Include"
+	]
 }

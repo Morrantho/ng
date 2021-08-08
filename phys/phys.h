@@ -6,7 +6,7 @@ void ng_phys_init()
 
 }
 
-void ng_phys_integrate(register ng_f64_t state,register ng_f64_t t,register ng_f64_t dt)
+void ng_phys_think()
 {
 	
 }

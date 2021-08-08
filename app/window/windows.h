@@ -19,7 +19,7 @@ LRESULT CALLBACK ng_app_window_proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp)
 	return DefWindowProc(hwnd,msg,wp,lp);
 }
 
-void ng_app_window_poll()
+void ng_app_window_think()
 {
 	MSG msg={0};
 	while(PeekMessage(&msg,0,0,0,PM_NOREMOVE))

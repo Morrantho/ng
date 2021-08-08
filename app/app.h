@@ -4,44 +4,42 @@
 void ng_app_init()
 {
 	ng_time_init();
+	ng_input_init();
 	ng_phys_init();
 	ng_gfx_init();
 	ng_app_window_init();
 }
 
-void ng_app_tick()
+void ng_app_think()
 {
 	while(ng_app.running)
 	{
-		register ng_i64_t ct=ng_time_micros();
-		ng_app_window_poll();
-		ng_app.ft=(ct-ng_app.ct)/1000000.0;
-		ng_app.ct=ct;
-		if(ng_app.ft>0.25) ng_app.ft=0.25;
-		ng_app.acc+=ng_app.ft; /* Accumulate leftover time */
-		while(ng_app.acc>=ng_app.dt)
+		register ng_u64_t curtime=ng_time_micros();
+		ng_app_window_think();
+		ng_input_think();
+		ng_app.delta=(curtime-ng_app.curtime)*0.000001;
+		ng_app.accumulated+=ng_app.delta;
+		while(ng_app.accumulated>=NG_TIME_DELTA)
 		{
-			ng_app.state_last=ng_app.state_now;
-			ng_phys_integrate(ng_app.state_now,ng_app.t,ng_app.dt);
-			ng_app.t+=ng_app.dt;
-			ng_app.acc-=ng_app.dt;
+			ng_phys_think();
+			ng_app.elapsed+=NG_TIME_DELTA;
+			ng_app.accumulated-=NG_TIME_DELTA;
 		}
-		ng_app.alpha=ng_app.acc/ng_app.dt;
-		ng_f64_t state=ng_app.state_now*ng_app.alpha+ng_app.state_last*(1.0-ng_app.alpha);
-		ng_gfx_render(state);
+		ng_gfx_think();
+		ng_app.curtime=curtime;
 	}
 }
 
 void ng_app_deinit()
 {
-	
+	ng_gfx_deinit();
 }
 
 void ng_app_main()
 {
 	/* Loading? */
 	ng_app_init();
-	ng_app_tick();
+	ng_app_think();
 	/* Saving? */
 	ng_app_deinit();
 }
