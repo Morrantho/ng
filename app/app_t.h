@@ -7,9 +7,9 @@ struct
 	ng_f64_t elapsed;
 	ng_f64_t delta;
 	ng_f64_t accumulated;
-}ng_app=
+}static ng_app=
 {
 	.running=1,
 	0
 };
-#endif//__NG_APP_T_H__
+#endif/* __NG_APP_T_H__ */

@@ -22,4 +22,4 @@
 #endif
 #define _NG_STD_SIMD_INCL(F,EXT) NG_STR(NG_CAT(F##_,NG_STD_SIMD.EXT))
 #define NG_STD_SIMD_INCL(F,EXT) _NG_STD_SIMD_INCL(F,EXT)
-#endif//__NG_STD_SIMD_H__
+#endif/* __NG_STD_SIMD_H__ */

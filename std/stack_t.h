@@ -1,5 +1,5 @@
-#ifndef __NG_STD_STACK_T_H__
-#define __NG_STD_STACK_T_H__
+#ifndef __NG_STD_STACK_H__
+#define __NG_STD_STACK_H__
 
 typedef struct ng_std_stack_t ng_std_stack_t,*ng_std_stack_p,**ng_std_stack_p2;
 
@@ -39,4 +39,4 @@ ng_void_p ng_std_stack_pop(ng_std_stack_p2 s)
 	ng_mem_free(top);
 	return value;
 }
-#endif//__NG_STD_STACK_T_H__
+#endif/* __NG_STD_STACK_H__ */

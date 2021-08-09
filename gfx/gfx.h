@@ -17,4 +17,4 @@ void ng_gfx_deinit()
 {
 	ng_gfx_vk_deinit();
 }
-#endif//__NG_GFX_H__
+#endif/* __NG_GFX_H__ */

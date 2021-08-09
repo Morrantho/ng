@@ -38,4 +38,4 @@ ng_i8_p ng_std_str_cat(register ng_i8_p a,register ng_i8_p b)
 	res[i]='\0';
 	return res;
 }
-#endif//__NG_STD_STRING_H__
+#endif/* __NG_STD_STRING_H__ */

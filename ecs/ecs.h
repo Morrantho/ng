@@ -1,73 +1,49 @@
 #ifndef __NG_ECS_H__
 #define __NG_ECS_H__
-
-#ifndef NG_ECS_ENT_MAX
-#define NG_ECS_ENT_MAX 8192
-#endif
-
-#ifndef NG_ECS_CMP_MAX
-#define NG_ECS_CMP_MAX 64
-#endif
-
-#ifndef NG_ECS_SYS_MAX
-#define NG_ECS_SYS_MAX 32
-#endif
-
-typedef struct ng_ecs_none_t
-{
-	ng_u8_t blank;
-}ng_ecs_none_t;
-
+#define NG_ECS_ENTITY_MAX 1<<16/* 65k for now */
+#define NG_ECS_COMPONENT_MAX 1<<6/* must be 32/64 bit */
+#define NG_ECS_SYSTEM_MAX 1<<5/* prolly no more than 255 */
 #ifndef NG_ECS_COMPONENTS
 #define NG_ECS_COMPONENTS\
-	X(NG_ECS_NONE,ng_ecs_none_t,none)
+	X(NG_ECS_NCMP,ng_u8_t,spare)
 #endif
+#include "entity_t.h"
+#include "component_t.h"
+#include "system_t.h"
+#include "ecs_t.h"
 
-#define X(A,B,C) A,
-
-typedef void (*ng_ecs_fn_p)(ng_u64_t);
-
-typedef enum ng_ecs_component_t
+void ng_ecs_init()
 {
-	NG_ECS_COMPONENTS
-}ng_ecs_component_t,*ng_ecs_component_p;
-
-typedef struct ng_ecs_system_t
-{
-	ng_u8_t entities[NG_ECS_ENT_MAX];/*Bool array*/
-	ng_u64_t mask;
-	ng_ecs_fn_p run;
-}ng_ecs_system_t,*ng_ecs_system_p;
-
-struct
-{
-	ng_u64_t entities[NG_ECS_ENT_MAX];
-	#undef  X
-	#define X(A,B,C) B C[NG_ECS_ENT_MAX];
-	NG_ECS_COMPONENTS
-	ng_ecs_system_t systems[NG_ECS_SYS_MAX];
-}ng_ecs=
-{
-	.entities={0},
-	.systems={0},
-	#undef  X
-	#define X(A,B,C) .C={0},
-	NG_ECS_COMPONENTS
-};
-
-void ng_ecs_system(register ng_u64_t mask,register ng_ecs_fn_p fn)
-{
-	static ng_i32_t id=0;
-	ng_ecs.systems[id].mask=mask;
-	ng_ecs.systems[id].run=fn;
-	id++;
+	
 }
 
-void ng_ecs_component_toggle(register ng_u64_t e,register ng_ecs_component_t c)
+ng_ecs_entity_t ng_ecs_entity()
+{
+	ng_ecs_entity_t e;
+	for(e=0;e<NG_ECS_ENTITY_MAX;e++)
+	{
+		if(!ng_ecs.entities[e])
+		{
+			return e;
+		}
+	}
+	return NG_ECS_ENTITY_MAX-1;
+}
+
+void ng_ecs_system(register ng_u64_t mask,register ng_ecs_system_fn_p fn)
+{
+	static ng_u8_t system_id=0;
+	ng_ecs.systems[system_id].mask=mask;
+	ng_ecs.systems[system_id].run=fn;
+	system_id++;
+}
+
+void ng_ecs_component_toggle(register ng_ecs_entity_t e,register ng_ecs_component_t c)
 {
 	ng_ecs.entities[e]^=1<<c;
 	register ng_u64_t em=ng_ecs.entities[e];
-	for(register ng_u64_t s=0;s<NG_ECS_SYS_MAX;s++)
+	register ng_u8_t s;
+	for(s=0;s<NG_ECS_SYSTEM_MAX;s++)
 	{
 		register ng_u64_t sm=ng_ecs.systems[s].mask;
 		register ng_u64_t r=em&sm;
@@ -77,12 +53,18 @@ void ng_ecs_component_toggle(register ng_u64_t e,register ng_ecs_component_t c)
 /* store systems by type later */
 void ng_ecs_think(register ng_u8_t type)
 {
-	for(register ng_i32_t s=0;s<NG_ECS_SYS_MAX;s++)
+	register ng_u8_t s;
+	register ng_u16_t e;
+	for(s=0;s<NG_ECS_SYSTEM_MAX;s++)
 	{
 		if(!ng_ecs.systems[s].run) continue;
-		for(register ng_i32_t e=0;e<NG_ECS_ENT_MAX;e++)
+		for(e=0;e<NG_ECS_ENTITY_MAX;e++)
+		{
 			if(ng_ecs.systems[s].entities[e])
+			{
 				ng_ecs.systems[s].run(e);
+			}
+		}
 	}
 }
 #endif/*__NG_ECS_H__*/

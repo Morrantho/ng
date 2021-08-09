@@ -1,9 +1,7 @@
-#ifndef __NG_TIME_H__
-#define __NG_TIME_H__
-
-#define NG_TIME_DELTA 0.01 // 1/60 fixed
-
-LARGE_INTEGER ng_time_frequency={0};
+#ifndef __NG_TIME_WINDOWS_H__
+#define __NG_TIME_WINDOWS_H__
+#include "time.h"
+static LARGE_INTEGER ng_time_frequency={0};
 
 ng_u64_t ng_time_micros()
 {
@@ -17,4 +15,4 @@ void ng_time_init()
 	QueryPerformanceFrequency(&ng_time_frequency);
 	ng_app.curtime=ng_time_micros();
 }
-#endif//__NG_TIME_H__
+#endif/* __NG_TIME_WINDOWS_H__ */

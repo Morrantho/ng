@@ -10,4 +10,4 @@ void ng_phys_think()
 {
 	
 }
-#endif//__NG_PHYS_H__
+#endif/* __NG_PHYS_H__ */

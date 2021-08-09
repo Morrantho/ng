@@ -1,6 +1,6 @@
 #ifndef __NG_APP_WINDOW_WINDOWS_H__
 #define __NG_APP_WINDOW_WINDOWS_H__
-
+#include "window.h"
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
@@ -42,4 +42,4 @@ void ng_app_window_init()
 	ShowWindow(hwnd,3);
 	UpdateWindow(hwnd);
 }
-#endif//__NG_APP_WINDOW_WINDOWS_H__
+#endif/* __NG_APP_WINDOW_WINDOWS_H__ */

@@ -9,4 +9,4 @@ void ng_input_think()
 {
 	
 }
-#endif//__NG_INPUT_H__
+#endif/* __NG_INPUT_H__ */

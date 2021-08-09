@@ -5,4 +5,4 @@
 #include "vec_t.h"
 #include "vecn_t.h"
 #include "simd.h"
-#endif//__NG_STD_H__
+#endif/* __NG_STD_H__ */

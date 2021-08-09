@@ -1,25 +1,36 @@
 #ifndef __NG_MEM_H__
 #define __NG_MEM_H__
+#include <stdlib.h>
 #include "size.h"
 
 #ifndef NG_MEM_SIZE
-#define NG_MEM_SIZE NG_MEM_MB
+#define NG_MEM_SIZE NG_MEM_GB
 #endif
 
-ng_u64_t ng_mem_ptr=0;
-ng_u64_t ng_mem[NG_MEM_SIZE]={0};
+static ng_u64_t ng_mem_ptr=0;
+static ng_u64_t ng_mem[NG_MEM_GB]={0};
+
+void ng_mem_init()
+{
+}
+
+void ng_mem_deinit()
+{
+}
 
 void ng_mem_fill(register ng_void_p block,register ng_u64_t bytes,register ng_i8_t data)
 {
-	for(ng_u64_t i=0;i<bytes;i++) *(ng_i8_p)(block+i)=data;
+	ng_u64_t i;
+	for(i=0;i<bytes;i++) *(ng_i8_p)(block+i)=data;
 }
 
 void ng_mem_cpy(register ng_void_p from,register ng_u64_t bytes,register ng_void_p to)
 {
-	for(ng_u64_t i=0;i<bytes;i++) *(ng_i8_p)(to+i)=*(ng_i8_p)(from+i);
+	ng_u64_t i;	
+	for(i=0;i<bytes;i++) *(ng_i8_p)(to+i)=*(ng_i8_p)(from+i);
 }
 
-static inline ng_u64_t ng_mem_probe(register ng_u64_t bytes)
+static ng_u64_t ng_mem_probe(register ng_u64_t bytes)
 {
 	register ng_u64_t index=ng_mem_ptr;
 	register ng_u64_t found=0;
@@ -94,4 +105,4 @@ ng_void_p ng_mem_realloc(register ng_void_p old_block,register ng_u64_t new_byte
 	ng_mem_free(old_block);
 	return new_block;
 }
-#endif//__NG_MEM_H__
+#endif/* __NG_MEM_H__ */

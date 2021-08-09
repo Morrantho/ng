@@ -5,10 +5,10 @@ struct
 	VkInstance instance;
 	VkApplicationInfo application_info;
 	VkInstanceCreateInfo instance_create_info;
-}ng_gfx=
+}static ng_gfx=
 {
 	.instance=0,
 	.application_info={0},
 	.instance_create_info={0}
 };
-#endif//__NG_GFX_VK_T_H__
+#endif/* __NG_GFX_VK_T_H__ */

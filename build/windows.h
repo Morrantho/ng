@@ -4,4 +4,4 @@
 #include <windows.h>
 #include "../app/window/windows.h"
 #include "../time/windows.h"
-#endif//__NG_WINDOWS_H__
+#endif/* __NG_WINDOWS_H__ */

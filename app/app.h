@@ -3,6 +3,7 @@
 
 void ng_app_init()
 {
+	ng_mem_init();
 	ng_time_init();
 	ng_input_init();
 	ng_phys_init();
@@ -33,6 +34,7 @@ void ng_app_think()
 void ng_app_deinit()
 {
 	ng_gfx_deinit();
+	ng_mem_deinit();
 }
 
 void ng_app_main()
@@ -43,4 +45,4 @@ void ng_app_main()
 	/* Saving? */
 	ng_app_deinit();
 }
-#endif//__NG_APP_H__
+#endif/* __NG_APP_H__ */

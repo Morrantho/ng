@@ -17,4 +17,4 @@ typedef long double ng_f80_t,*ng_f80_p;
 typedef void *ng_void_p,**ng_void_p2,***ng_void_p3;
 
 typedef ng_void_p (*ng_fn_p)(ng_u8_t,...);
-#endif//__NG_DEFS_H__
+#endif/* __NG_DEFS_H__ */

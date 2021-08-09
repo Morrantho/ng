@@ -1,5 +1,5 @@
-#ifndef __NG_STD_VEC_T_H__
-#define __NG_STD_VEC_T_H__
+#ifndef __NG_STD_VEC_H__
+#define __NG_STD_VEC_H__
 /* Where the hell did the source to this go? Guess we're rewriting this when we need it. */
 #ifndef NG_STD_VEC_MAX
 #define NG_STD_VEC_MAX 32
@@ -54,4 +54,4 @@ ng_void_p ng_std_vec_pop(register ng_std_vec_p v)
 {
 	return 0;
 }
-#endif//__NG_STD_VEC_T_H__
+#endif/* __NG_STD_VEC_H__ */

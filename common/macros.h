@@ -7,4 +7,4 @@
 #define NG_STR(S) _NG_STR(S)
 
 #define NG_LEN(ARR) sizeof(ARR)/sizeof(ARR[0])
-#endif//__NG_MACROS_H__
+#endif/* __NG_MACROS_H__ */

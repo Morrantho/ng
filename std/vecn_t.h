@@ -1,5 +1,5 @@
-#ifndef __NG_STD_VECN_T_H__
-#define __NG_STD_VECN_T_H__
+#ifndef __NG_STD_VECN_H__
+#define __NG_STD_VECN_H__
 
 typedef ng_f64_p ng_std_vecn_p;
 
@@ -29,4 +29,4 @@ ng_f64_t ng_std_vecn_dot(register ng_std_vecn_p a,register ng_std_vecn_p b)
 	for(ng_u8_t i=0;i<NG_LEN(a);i++) product+=a[i]*b[i];
 	return product;
 }
-#endif//__NG_STD_VECN_T_H__
+#endif/* __NG_STD_VECN_H__ */

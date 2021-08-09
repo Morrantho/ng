@@ -15,6 +15,11 @@ void ng_gfx_vk_init_application_info()
 
 ng_u8_t ng_gfx_vk_init_instance_info()
 {
+	ng_u32_t nextensions=0;
+	vkEnumerateInstanceExtensionProperties(0,&nextensions,0);
+	VkExtensionProperties extension_properties[nextensions];
+	vkEnumerateInstanceExtensionProperties(0,&nextensions,extension_properties);
+
 	ng_gfx.instance_create_info.sType=VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 	ng_gfx.instance_create_info.pApplicationInfo=&ng_gfx.application_info;
 	ng_gfx.instance_create_info.enabledExtensionCount=0;
@@ -34,4 +39,4 @@ void ng_gfx_vk_deinit()
 {
 	vkDestroyInstance(ng_gfx.instance,0);
 }
-#endif//__NG_GFX_VK_H__
+#endif/* __NG_GFX_VK_H__ */
