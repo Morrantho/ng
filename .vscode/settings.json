@@ -4,7 +4,11 @@
 		"type_traits": "cpp",
 		"defs.h": "c",
 		"app.h": "c",
-		"vulkan.h": "c"
+		"vulkan.h": "c",
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"utility": "c"
 	},
 	"C_Cpp.default.includePath":
 	[
