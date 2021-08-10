@@ -14,14 +14,14 @@ typedef struct ng_std_vec_t
 
 void ng_std_vec_init(register ng_std_vec_p v)
 {
-	v->data=ng_mem_calloc(sizeof(ng_void_p)*NG_STD_VEC_MAX);
+	v->data=ng_mem_calloc(ng_std_pool,ng_std_pool_index,sizeof(ng_void_p)*NG_STD_VEC_MAX);
 	v->capacity=NG_STD_VEC_MAX;
 	v->size=0;
 }
 
 void ng_std_vec_deinit(register ng_std_vec_p v)
 {
-	ng_mem_free(v->data);
+	ng_mem_free(ng_std_pool,ng_std_pool_index,v->data);
 	v->data=0;
 	v->capacity=0;
 	v->size=0;
@@ -29,7 +29,7 @@ void ng_std_vec_deinit(register ng_std_vec_p v)
 
 ng_std_vec_p ng_std_vec()
 {
-	register ng_std_vec_p v=ng_mem_alloc(sizeof(ng_std_vec_t));
+	register ng_std_vec_p v=ng_mem_alloc(ng_std_pool,ng_std_pool_index,sizeof(ng_std_vec_t));
 	ng_std_vec_init(v);
 	return v;
 }
@@ -37,7 +37,7 @@ ng_std_vec_p ng_std_vec()
 void ng_std_vec_del(register ng_std_vec_p v)
 {
 	ng_std_vec_deinit(v);
-	ng_mem_free(v);
+	ng_mem_free(ng_std_pool,ng_std_pool_index,v);
 }
 
 void ng_std_vec_resize(register ng_std_vec_p v,register ng_i8_t dir)

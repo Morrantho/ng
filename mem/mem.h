@@ -40,7 +40,7 @@ static ng_u64_t ng_mem_probe(register ng_mem_pool_p pool,register ng_mem_pool_t 
 	return index-found;
 }
 
-ng_void_p ng_mem_alloc(register ng_mem_pool_p pool,register ng_mem_pool_t pool_index,register ng_u64_t bytes)
+ng_void_p ng_mem_alloc(register ng_mem_pool_p pool,register ng_u64_t pool_index,register ng_u64_t bytes)
 {
 	register ng_u64_t total=bytes+8;
 	register ng_u64_t i=ng_mem_probe(pool,pool_index,total);
@@ -50,14 +50,14 @@ ng_void_p ng_mem_alloc(register ng_mem_pool_p pool,register ng_mem_pool_t pool_i
 	return (ng_void_p)addr+8;
 }
 
-ng_void_p ng_mem_calloc(register ng_mem_pool_p pool,register ng_mem_pool_t pool_index,register ng_u64_t bytes)
+ng_void_p ng_mem_calloc(register ng_mem_pool_p pool,register ng_u64_t pool_index,register ng_u64_t bytes)
 {
 	register ng_void_p block=ng_mem_alloc(pool,pool_index,bytes);/* this comes back past the header */
 	ng_mem_fill(block,bytes,0);/* so just zero it */
 	return block;
 }
 
-ng_void_p ng_mem_resize(register ng_mem_pool_p pool,register ng_mem_pool_t pool_index,register ng_void_p old_block,register ng_u64_t new_bytes)
+ng_void_p ng_mem_resize(register ng_mem_pool_p pool,register ng_u64_t pool_index,register ng_void_p old_block,register ng_u64_t new_bytes)
 {
 	register ng_u64_t old_start=(ng_u64_t)old_block-8;/* header */
 	register ng_u64_t old_bytes=*(ng_u64_p)old_start;/* includes pointer size */
@@ -81,7 +81,7 @@ ng_void_p ng_mem_resize(register ng_mem_pool_p pool,register ng_mem_pool_t pool_
 	return 0;
 }
 
-void ng_mem_free(register ng_mem_pool_p pool,register ng_mem_pool_t pool_index,register ng_void_p block)
+void ng_mem_free(register ng_mem_pool_p pool,register ng_u64_t pool_index,register ng_void_p block)
 {
 	register ng_u64_t start=(ng_u64_t)block-8;
 	register ng_u64_t end=start+*(ng_u64_p)start;
@@ -89,7 +89,7 @@ void ng_mem_free(register ng_mem_pool_p pool,register ng_mem_pool_t pool_index,r
 	pool_index=end-(ng_u64_t)pool;/* get back to an index that probe() understands. */
 }
 
-ng_void_p ng_mem_realloc(register ng_mem_pool_p pool,register ng_mem_pool_t pool_index,register ng_void_p old_block,register ng_u64_t new_bytes)
+ng_void_p ng_mem_realloc(register ng_mem_pool_p pool,register ng_u64_t pool_index,register ng_void_p old_block,register ng_u64_t new_bytes)
 {
 	if(ng_mem_resize(pool,pool_index,old_block,new_bytes)) return old_block;
 	register ng_u64_t old_start=(ng_u64_t)old_block-8;
