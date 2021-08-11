@@ -2,6 +2,7 @@
 #include "../common/common.h"
 #include "../mem/mem.h"
 #include "../std/std.h"
+#include "../math/math.h"
 #include "../input/input.h"
 #include "../ecs/ecs.h"
 #include "../phys/phys.h"
