@@ -18,7 +18,7 @@ typedef struct ng_std_list_t
 
 ng_std_list_node_p ng_std_list_node(ng_void_p value)
 {
-	ng_std_list_node_p node=ng_mem_alloc(ng_std_pool,ng_std_pool_index,sizeof(ng_std_list_node_t));
+	ng_std_list_node_p node=ng_mem_alloc(ng_std_pool,sizeof(ng_std_list_node_t));
 	node->next=0;
 	node->previous=0;
 	node->value=value;
@@ -27,12 +27,12 @@ ng_std_list_node_p ng_std_list_node(ng_void_p value)
 
 void _ng_std_list_node_(ng_std_list_node_p node)
 {
-	ng_mem_free(ng_std_pool,ng_std_pool_index,node);
+	ng_mem_free(ng_std_pool,node);
 }
 
 ng_std_list_p ng_std_list()
 {
-	ng_std_list_p list=ng_mem_alloc(ng_std_pool,ng_std_pool_index,sizeof(ng_std_list_t));
+	ng_std_list_p list=ng_mem_alloc(ng_std_pool,sizeof(ng_std_list_t));
 	list->head=0;
 	list->tail=0;
 	return list;
@@ -48,7 +48,7 @@ void _ng_std_list_(ng_std_list_p list)
 		tail=tail->previous;
 		_ng_std_list_node_(last);
 	}
-	ng_mem_free(ng_std_pool,ng_std_pool_index,list);
+	ng_mem_free(ng_std_pool,list);
 }
 
 void ng_std_list_push(ng_std_list_p list,ng_void_p value)

@@ -13,14 +13,14 @@ typedef struct ng_std_vec_t
 
 void ng_std_vec_init(register ng_std_vec_p vec)
 {
-	vec->data=ng_mem_calloc(ng_std_pool,ng_std_pool_index,sizeof(ng_void_p)*NG_STD_VEC_MAX);
+	vec->data=ng_mem_calloc(ng_std_pool,sizeof(ng_void_p)*NG_STD_VEC_MAX);
 	vec->capacity=NG_STD_VEC_MAX;
 	vec->size=0;
 }
 
 void ng_std_vec_deinit(register ng_std_vec_p vec)
 {
-	ng_mem_free(ng_std_pool,ng_std_pool_index,vec->data);
+	ng_mem_free(ng_std_pool,vec->data);
 	vec->data=0;
 	vec->capacity=0;
 	vec->size=0;
@@ -28,7 +28,7 @@ void ng_std_vec_deinit(register ng_std_vec_p vec)
 
 ng_std_vec_p ng_std_vec()
 {
-	register ng_std_vec_p vec=ng_mem_alloc(ng_std_pool,ng_std_pool_index,sizeof(ng_std_vec_t));
+	register ng_std_vec_p vec=ng_mem_alloc(ng_std_pool,sizeof(ng_std_vec_t));
 	ng_std_vec_init(vec);
 	return vec;
 }
@@ -36,13 +36,13 @@ ng_std_vec_p ng_std_vec()
 void _ng_std_vec_(register ng_std_vec_p vec)
 {
 	ng_std_vec_deinit(vec);
-	ng_mem_free(ng_std_pool,ng_std_pool_index,vec);
+	ng_mem_free(ng_std_pool,vec);
 }
 
 void ng_std_vec_resize(register ng_std_vec_p vec,register ng_i8_t dir)
 {
 	vec->capacity+=NG_STD_VEC_MAX*dir;
-	vec->data=ng_mem_realloc(ng_std_pool,ng_std_pool_index,vec->data,sizeof(ng_void_p)*vec->capacity);
+	vec->data=ng_mem_realloc(ng_std_pool,vec->data,sizeof(ng_void_p)*vec->capacity);
 }
 
 void ng_std_vec_push(register ng_std_vec_p vec,register ng_void_p value)

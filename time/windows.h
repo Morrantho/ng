@@ -13,6 +13,6 @@ ng_u64_t ng_time_micros()
 void ng_time_init()
 {
 	QueryPerformanceFrequency(&ng_time_frequency);
-	ng_app.curtime=ng_time_micros();
+	g_ng_app.curtime=ng_time_micros();
 }
 #endif/* __NG_TIME_WINDOWS_H__ */

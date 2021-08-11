@@ -16,7 +16,7 @@ ng_u64_t ng_std_str_len(register ng_i8_p a)
 ng_i8_p ng_std_str_cpy(register ng_i8_p a)
 {
 	register ng_u64_t len=ng_std_str_len(a);
-	register ng_i8_p b=ng_mem_alloc(ng_std_pool,ng_std_pool_index,len);
+	register ng_i8_p b=ng_mem_alloc(ng_std_pool,len);
 	for(ng_u64_t i=0;i<len;i++) b[i]=a[i];
 	return b;
 }
@@ -31,7 +31,7 @@ ng_i8_p ng_std_str_cat(register ng_i8_p a,register ng_i8_p b)
 {
 	ng_u64_t la=ng_std_str_len(a);
 	ng_u64_t lb=ng_std_str_len(b);
-	ng_i8_p res=ng_mem_alloc(ng_std_pool,ng_std_pool_index,la+lb);
+	ng_i8_p res=ng_mem_alloc(ng_std_pool,la+lb);
 	ng_u64_t i=0;
 	for(;i<la;i++) res[i]=a[i];
 	for(ng_u64_t j=0;j<lb;j++,i++) res[i]=b[j];

@@ -13,7 +13,7 @@ LRESULT CALLBACK ng_app_window_proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp)
 			return 0;
 		case WM_CLOSE:
 			DestroyWindow(hwnd);
-			ng_app.running=0;
+			g_ng_app.running=0;
 			return 0;
 	}
 	return DefWindowProc(hwnd,msg,wp,lp);

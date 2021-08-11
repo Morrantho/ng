@@ -7,7 +7,7 @@ struct
 	#define X(A,B,C) B C[NG_ECS_ENTITY_MAX];
 	NG_ECS_COMPONENTS
 	ng_ecs_system_t systems[NG_ECS_SYSTEM_MAX];
-}static ng_ecs=
+}static g_ng_ecs=
 {
 	.entities={0},
 	.systems={0},
