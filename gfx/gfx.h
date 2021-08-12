@@ -1,5 +1,6 @@
 #ifndef __NG_GFX_H__
 #define __NG_GFX_H__
+#include "color_t.h"
 #include "vk/vk.h"
 
 void ng_gfx_init()
