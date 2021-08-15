@@ -3,7 +3,6 @@
 /* ecs component */
 typedef struct ng_phys_fixture_t
 {
-	ng_u8_t frozen;
 	ng_f64_t density;
 	ng_f64_t friction;
 	ng_f64_t gravity;
